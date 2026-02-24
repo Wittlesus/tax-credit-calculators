@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Solar Lease vs Buy Calculator | TaxCreditCalculators.com</title>
+    <meta name="description" content="Free 50-state solar calculator updated for OBBBA. Section 25D expired for buyers. Section 48E still active for leases. See your savings before the July 4, 2026 deadline.">
+    <meta name="keywords" content="solar tax credit 2026, OBBBA solar, Section 48E, solar lease vs buy, solar savings calculator, Section 25D expired">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="The 30% Solar Tax Credit Expired. Here's What Still Works.">
+    <meta property="og:description" content="Free calculator: see how much you save by leasing solar in 2026 after OBBBA. 50 states, real numbers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://taxcreditcalculators.com">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="2026 Solar Lease vs Buy Calculator">
+    <meta name="twitter:description" content="Section 25D expired. Section 48E still active for leases. See your state's numbers.">
+
+    <link rel="canonical" href="https://taxcreditcalculators.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+    <div class="container nav__inner">
+        <a href="/" class="nav__brand">TaxCreditCalculators.com</a>
+        <span class="nav__tag">Updated Feb 2026</span>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <div class="hero__eyebrow">Section 25D Expired 12/31/2025</div>
+        <h1 class="hero__title">The 30% Solar Tax Credit Expired.<br>Here's What Replaced It.</h1>
+        <p class="hero__subtitle">If you buy solar in 2026, you get $0 in federal credits. But if you lease, Section 48E still saves you thousands. See your state's real numbers.</p>
+        <a href="#calculator" class="hero__cta">Calculate Your Savings</a>
+    </div>
+</section>
+
+<!-- What Changed -->
+<section class="comparison">
+    <div class="container">
+        <h2 class="comparison__title">What Changed in 2026</h2>
+        <div class="comparison__grid">
+            <div class="card card--expired">
+                <span class="card__badge card__badge--expired">Expired</span>
+                <div class="card__type">Buying Solar</div>
+                <div class="card__section">Section 25D</div>
+                <div class="card__rate card__rate--expired">0%</div>
+                <p class="card__desc">The residential clean energy credit for homeowner purchases expired December 31, 2025 under the One Big Beautiful Bill Act.</p>
+            </div>
+            <div class="card card--active">
+                <span class="card__badge card__badge--active">Active</span>
+                <div class="card__type">Leasing Solar</div>
+                <div class="card__section">Section 48E</div>
+                <div class="card__rate card__rate--active">30%</div>
+                <p class="card__desc">The Investment Tax Credit for third-party owned systems is still active. Installers claim 30% and pass savings to you through lower lease rates.</p>
+            </div>
+        </div>
+        <div class="deadline-banner">
+            <strong>Safe Harbor Deadline:</strong> Construction must begin by July 4, 2026 to qualify. Time is limited.
+        </div>
+    </div>
+</section>
+
+<!-- Calculator -->
+<section id="calculator" class="calculator-section">
+    <div class="container">
+        <h2 class="calculator-section__title">Calculate Your Savings</h2>
+        <p class="calculator-section__subtitle">Select your state and system details to see an estimate.</p>
+
+        <div class="calculator container--narrow">
+            <div class="form-group">
+                <label class="form-label" for="stateSelect">Your State</label>
+                <select id="stateSelect" class="form-select">
+                    <!-- Populated by calculator.js -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="systemCost">Estimated System Cost ($)</label>
+                <input type="number" id="systemCost" class="form-input" value="30000" min="1000" max="200000">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="paymentMethod">How Would You Acquire Solar?</label>
+                <select id="paymentMethod" class="form-select">
+                    <option value="lease">Lease / PPA (Section 48E -- Still Active)</option>
+                    <option value="buy">Cash / Loan Purchase (Section 25D -- Expired)</option>
+                </select>
+            </div>
+
+            <button class="btn btn--primary" onclick="calculate()">Calculate Monthly Savings</button>
+
+            <!-- Results -->
+            <div id="results" class="results">
+                <div class="results__label">Estimated Monthly Bill Reduction</div>
+                <div id="monthlySavings" class="results__amount">$0/mo</div>
+                <div id="breakdown" class="results__breakdown"></div>
+                <div id="urgentNotice" class="results__warning" style="display:none;"></div>
+            </div>
+
+            <!-- Lead Capture Form -->
+            <div id="leadForm" class="lead-form">
+                <div id="leadFormFields">
+                    <div class="lead-form__title">Lock In These Savings</div>
+                    <p class="lead-form__subtitle">Get free quotes from vetted solar installers in <strong id="leadFormState">your state</strong>. No spam, no obligation.</p>
+
+                    <form onsubmit="submitLeadForm(event)">
+                        <!-- Hidden calculator context -->
+                        <input type="hidden" id="lead_state" name="state">
+                        <input type="hidden" id="lead_systemCost" name="system_cost">
+                        <input type="hidden" id="lead_method" name="acquisition_method">
+                        <input type="hidden" id="lead_monthlySavings" name="estimated_monthly_savings">
+                        <input type="hidden" name="_subject" value="New Solar Lead from TaxCreditCalculators.com">
+
+                        <div class="lead-form__row">
+                            <input type="text" name="name" class="lead-form__input" placeholder="Full Name" required autocomplete="name">
+                            <input type="email" name="email" class="lead-form__input" placeholder="Email Address" required autocomplete="email">
+                        </div>
+                        <div class="lead-form__row">
+                            <input type="tel" name="phone" class="lead-form__input" placeholder="Phone (optional)" autocomplete="tel">
+                            <input type="text" name="zip" class="lead-form__input" placeholder="Zip Code" required autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5">
+                        </div>
+
+                        <button type="submit" class="btn btn--success">Get Free Quotes</button>
+
+                        <p class="lead-form__consent">By submitting, you agree to be connected with solar installers in your area. We do not sell your data to third parties. You may receive a phone call or email from a local installer.</p>
+                    </form>
+                </div>
+
+                <div id="leadFormSuccess" class="lead-form__success">
+                    <div class="lead-form__success-title">Request Received</div>
+                    <p class="lead-form__success-text">A local solar installer will contact you within 1-2 business days with a personalized quote. No obligation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+    <div class="container">
+        <h2 class="faq__title">Frequently Asked Questions</h2>
+        <div class="faq__list">
+            <div class="faq__item">
+                <button class="faq__question">Did the solar tax credit really expire?</button>
+                <div class="faq__answer">Yes, partially. Section 25D, which gave homeowners a 30% credit on solar purchases, expired December 31, 2025 under the One Big Beautiful Bill Act (Public Law 119-21). However, Section 48E, which covers commercially-owned and leased systems, remains active at 30%.</div>
+            </div>
+            <div class="faq__item">
+                <button class="faq__question">How does leasing still qualify for the credit?</button>
+                <div class="faq__answer">When you lease solar panels, the installer (or their financing partner) owns the system and claims the 30% Section 48E Investment Tax Credit. They pass a portion of those savings to you through lower monthly lease payments. Industry data shows roughly 20-50% pass-through, and our calculator uses a conservative 40% estimate.</div>
+            </div>
+            <div class="faq__item">
+                <button class="faq__question">What is the July 4, 2026 deadline?</button>
+                <div class="faq__answer">Per IRS Notice 2025-42, solar facilities must begin construction by July 4, 2026 to qualify for Section 48E credits under the standard timeline. After this date, projects must be placed in service by December 31, 2027. This means acting sooner locks in better terms from installers.</div>
+            </div>
+            <div class="faq__item">
+                <button class="faq__question">Are state incentives still available for leased systems?</button>
+                <div class="faq__answer">It depends on the state. Most state incentives apply to leased systems, but a few (like Massachusetts and Arizona) restrict their state tax credits to system owners only. New York's IT-255 credit is notable because lessees can claim it directly. Our calculator accounts for these differences.</div>
+            </div>
+            <div class="faq__item">
+                <button class="faq__question">How accurate is this calculator?</button>
+                <div class="faq__answer">This calculator provides conservative estimates based on verified federal and state incentive data. The 40% pass-through rate is a conservative assumption (industry range is 20-50%). Actual savings depend on your specific installer, roof, energy usage, and local utility rates. State data is sourced from DSIRE and state energy offices, updated February 2026. This is not tax or financial advice.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__disclaimer">
+            <strong>Legal Disclaimer:</strong> Estimates are based on Public Law 119-21 (One Big Beautiful Bill Act). Section 48E Investment Tax Credits (30%) are claimed by system owners (lessors), not homeowners. "Monthly savings" represents estimated value passed to the homeowner through competitive lease rates (~40% industry-standard pass-through over a 20-year term). Section 25D (residential purchase credits) expired 12/31/2025. State credit eligibility varies by state. In states with SREC programs (IL, NJ, MA, MD), renewable energy credits are typically retained by the system owner and sold separately. This is not tax, legal, or financial advice. Consult licensed professionals before making tax or energy decisions.
+        </div>
+        <div class="footer__sources">
+            Sources: <a href="https://www.congress.gov/bill/119th-congress/house-bill/1" target="_blank" rel="noopener">Public Law 119-21</a> |
+            <a href="https://www.irs.gov/pub/irs-drop/n-25-42.pdf" target="_blank" rel="noopener">IRS Notice 2025-42</a> |
+            <a href="https://www.dsireusa.org/" target="_blank" rel="noopener">DSIRE Database</a>
+        </div>
+        <div class="footer__bottom">
+            &copy; 2026 TaxCreditCalculators.com. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<!-- Analytics placeholder - fill in config.js -->
+<script>
+if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.analyticsId) {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + SITE_CONFIG.analyticsId;
+    document.head.appendChild(s);
+    s.onload = function() {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', SITE_CONFIG.analyticsId);
+    };
+}
+</script>
+
+<script src="config.js"></script>
+<script src="calculator.js"></script>
+
+</body>
+</html>
