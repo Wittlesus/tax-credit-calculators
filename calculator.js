@@ -177,7 +177,7 @@ function calculate() {
   var warning = document.getElementById('urgentNotice');
   if (method === 'lease') {
     warning.style.display = 'block';
-    warning.textContent = 'SAFE HARBOR DEADLINE: Construction must begin by July 4, 2026 to qualify for Section 48E credits.';
+    warning.textContent = 'TIMING: Leased systems qualify when placed in service by December 31, 2027, plus installer safe-harbor pipelines. The window narrows as 2027 approaches.';
   } else {
     warning.style.display = 'none';
   }
